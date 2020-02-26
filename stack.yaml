@@ -1,0 +1,15 @@
+resolver: lts-14.27
+
+packages:
+- hw0
+- hw1
+- hw2
+- hw3
+- hw4
+- practice1
+
+extra-deps: []
+
+flags: {}
+
+extra-package-dbs: []
