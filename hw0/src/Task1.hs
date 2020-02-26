@@ -1,8 +1,7 @@
 {-# LANGUAGE TypeOperators #-}
 
 module Task1 
-  (
-    associator
+  ( associator
   , distributivity
   , eitherAssoc
   ) where

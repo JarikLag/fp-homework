@@ -1,6 +1,5 @@
 module Task4 
-  (
-    factorial
+  ( factorial
   , fibonacci
   , iterateElement
   , mapFix 

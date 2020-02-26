@@ -1,6 +1,5 @@
 module Task6 
-  (
-    firstTerm
+  ( firstTerm
   , firstTermWHNF
   , foo
   , secondTerm

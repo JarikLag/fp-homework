@@ -1,8 +1,7 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 
 module Task7
-  (
-    termOne
+  ( termOne
   , termSecond
   , termThird
   ) where

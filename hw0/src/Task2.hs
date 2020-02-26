@@ -1,6 +1,5 @@
 module Task2 
-  (
-    doubleNeg
+  ( doubleNeg
   , doubleNegElim 
   , excludedNeg
   , pierce
