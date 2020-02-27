@@ -1,7 +1,6 @@
 module Task6
   ( firstTerm
   , firstTermWHNF
-  , foo
   , secondTerm
   , secondTermWHNF
   ) where

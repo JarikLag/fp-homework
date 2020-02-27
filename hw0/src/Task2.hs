@@ -28,11 +28,13 @@ excludedNeg = helper first second
     contrPos :: (a -> b) -> (Neg b -> Neg a)
     contrPos f g x = g $ f x
 
+-- | This doesn't have proof
 pierce :: ((a -> b) -> a) -> a
-pierce = undefined --doesn't have proof
+pierce = undefined
 
+-- | This doesn't have proof
 doubleNegElim :: Neg (Neg a) -> a
-doubleNegElim = undefined --doesn't have proof
+doubleNegElim = undefined
 
 thirdNegElim :: Neg (Neg (Neg a)) -> Neg a
 thirdNegElim = helper doubleNeg
