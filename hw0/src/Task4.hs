@@ -21,7 +21,9 @@ fibonacci n
   | otherwise = 0
 
 factorial :: Integer -> Integer
-factorial n = fix (\rec k -> if k == 0 then 1 else k * rec (k - 1)) n
+factorial n
+  | n >= 0 = fix (\rec k -> if k == 0 then 1 else k * rec (k - 1)) n
+  | otherwise = 0
 
 mapFix :: (a -> b) -> [a] -> [b]
 mapFix f xs = fix (\rec list -> if null list
