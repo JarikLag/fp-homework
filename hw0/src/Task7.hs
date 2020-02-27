@@ -95,7 +95,7 @@ termSecond = myLambda myList
                 secondPowArg = 6
 
 termThird :: Integral a => a -> Bool
-termThird = 
+termThird =
   let
     myImpl :: Bool -> Bool -> Bool
     myImpl = \x y -> (myNot x :: Bool) `myOr` y

@@ -1,4 +1,4 @@
-module Task5 
+module Task5
   ( churchMult
   , churchPlus
   , churchToInt

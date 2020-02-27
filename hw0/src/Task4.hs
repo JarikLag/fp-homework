@@ -1,4 +1,4 @@
-module Task4 
+module Task4
   ( factorial
   , fibonacci
   , iterateElement
@@ -24,6 +24,6 @@ factorial :: Integer -> Integer
 factorial n = fix (\rec k -> if k == 0 then 1 else k * rec (k - 1)) n
 
 mapFix :: (a -> b) -> [a] -> [b]
-mapFix f xs = fix (\rec list -> if null list 
-  then [] 
+mapFix f xs = fix (\rec list -> if null list
+  then []
   else f (head list) : rec (tail list)) xs
