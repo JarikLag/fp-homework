@@ -4,7 +4,9 @@ module Block4_Task3
   ( NonEmpty (..)
   ) where
 
-data NonEmpty a = a :| [a]
+-- | Date type which represents non-empty list.
+data NonEmpty a 
+  = a :| [a]
   deriving Show
 
 instance Foldable NonEmpty where

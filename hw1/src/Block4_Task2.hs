@@ -4,7 +4,11 @@ module Block4_Task2
   ( Tree (..)
   ) where
 
-data Tree a = Branch (Tree a) (Tree a) | Leaf a
+-- | Data type which represent tree, there value located
+-- only in leaves.
+data Tree a 
+  = Branch (Tree a) (Tree a) 
+  | Leaf a
   deriving Show
 
 instance Foldable Tree where
