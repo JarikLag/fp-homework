@@ -7,7 +7,9 @@ module Block3_Task2
   , ThisOrThat (..)
   ) where
 
-data NonEmpty a = a :| [a]
+-- | Data type which represents non-empty list.
+data NonEmpty a 
+  = a :| [a]
   deriving Show
 
 instance Semigroup (NonEmpty a) where
@@ -16,7 +18,11 @@ instance Semigroup (NonEmpty a) where
 
 -----------------------------------------------------------------------
 
-data ThisOrThat a b = This a | That b | Both a b
+-- | Data type which can contains A or B or A and B.
+data ThisOrThat a b 
+  = This a 
+  | That b 
+  | Both a b
   deriving Show
 
 instance (Semigroup a, Semigroup b) => Semigroup (ThisOrThat a b) where
@@ -33,7 +39,9 @@ instance (Semigroup a, Semigroup b) => Semigroup (ThisOrThat a b) where
 
 -----------------------------------------------------------------------
 
-newtype Name = Name String
+-- | Wrapper for strings which are concatenated with dot symbol.
+newtype Name 
+  = Name String
   deriving Show
 
 instance Monoid Name where
@@ -48,6 +56,7 @@ instance Semigroup Name where
 
 -----------------------------------------------------------------------
 
+-- | Wrapper for functions like a -> a.
 newtype Endo a = Endo { getEndo :: a -> a }
 
 instance Monoid (Endo a) where

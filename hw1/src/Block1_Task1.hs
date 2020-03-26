@@ -9,7 +9,15 @@ module Block1_Task1
   , nextDay 
   ) where
 
-data Day = Monday | Tuesday | Wednesday | Thursday | Friday | Saturday | Sunday
+-- | Data type which represents days of week.
+data Day 
+  = Monday 
+  | Tuesday 
+  | Wednesday 
+  | Thursday 
+  | Friday 
+  | Saturday 
+  | Sunday
   deriving Show
 
 instance Eq Day where
@@ -29,6 +37,8 @@ instance Eq Day where
   (==) Sunday Sunday       = True
   (==) Sunday _            = False
 
+-- | Returns the next day. E.g. the next day after Monday
+-- is Tuesday.
 nextDay :: Day -> Day
 nextDay day = case day of
   Monday    -> Tuesday
@@ -39,6 +49,8 @@ nextDay day = case day of
   Saturday  -> Sunday
   Sunday    -> Monday
 
+-- | Returns the day of the week that will occur after 
+-- the specified number of days.
 afterDays :: Day -> Integer -> Day
 afterDays day n
   | n < 0     = error "Negative number of days"
@@ -46,12 +58,14 @@ afterDays day n
   | n > 7     = afterDays (nextDay day) ((n `mod` 7) - 1)
   | otherwise = afterDays (nextDay day) (n - 1)
 
+-- | Checks whether the passed day is a weekend.
 isWeekend :: Day -> Bool
 isWeekend day = case day of
   Saturday -> True
   Sunday   -> True
   _        -> False
 
+-- | Returns number of days remaining untils Friday.
 daysToParty :: Day -> Integer
 daysToParty day = helper day 0
   where

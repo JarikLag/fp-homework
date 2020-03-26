@@ -6,6 +6,10 @@ module Block2_Task2
 import Data.List (foldl')
 import Data.List.NonEmpty (NonEmpty (..))
 
+-- | Splits the list into sublists by element and returns
+-- NonEmpty of lists.
+-- >>> splitOn '/' "path/to/file"
+-- "path" :| ["to","file"]
 splitOn :: Eq a => a -> [a] -> NonEmpty [a]
 splitOn delim list = foldr (helper delim) ([]:|[]) list
   where
@@ -15,6 +19,9 @@ splitOn delim list = foldr (helper delim) ([]:|[]) list
       then [] :| (x:xs)
       else (c:x) :| xs
 
+-- | Join given NonEmpty of lists into one list with element.
+-- >>> joinWith '/' ("path" :| ["to", "file"])
+-- "path/to/file"
 joinWith :: a -> NonEmpty [a] -> [a]
 joinWith _ (x:|[]) = x
 joinWith delim (x:|xs) = foldl' (\y z -> y ++ [delim] ++ z) x xs

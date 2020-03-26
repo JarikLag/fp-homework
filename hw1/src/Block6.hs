@@ -22,6 +22,7 @@ import Data.Char (isDigit, isSpace)
 
 --Task1-------------------------------------------------------------------
 
+-- | Wrapper for parser combinators.
 newtype Parser s a = Parser { runParser :: [s] -> Maybe (a, [s]) }
 
 instance Functor (Parser s) where
@@ -57,14 +58,19 @@ instance Alternative (Parser s) where
 
 --Task2-------------------------------------------------------------------
 
+-- | Parser which never fails and never consumes input.
 ok :: Parser s ()
 ok = Parser $ \s -> Just ((), s)
 
+-- | Parser which checks whether end of input is reached.
 eof :: Parser s ()
 eof = Parser $ \s -> case s of
   [] -> Just ((), s)
   _  -> Nothing
 
+-- | Parser which checks whether next element of input
+-- satisfy the given predicate and consumes element.
+-- Fails otherwise.
 satisfy :: (s -> Bool) -> Parser s s
 satisfy p = Parser $ \s -> case s of
   []     -> Nothing
@@ -72,14 +78,21 @@ satisfy p = Parser $ \s -> case s of
             then Just (x, xs) 
             else Nothing
 
+-- | Parser which checks whether next element from input
+-- is equal to given and consumes element. Fails otherwise.
 element :: Eq s => s -> Parser s s
 element c = satisfy (== c)
 
+-- | Parser which checks whether prefix of input is equal
+-- to given list of elements and consumes these elements.
+-- Fails otherwise.
 stream :: Eq s => [s] -> Parser s [s]
 stream = traverse element
 
 --Task3-------------------------------------------------------------------
 
+-- | Checks whether given string is correct brace sequence.
+-- Returns True if yes, False otherwise.
 parseCBS :: String -> Bool
 parseCBS s = 
   let 
@@ -93,6 +106,8 @@ parseCBS s =
       Nothing -> False
       _       -> True
 
+-- | Trying to parse given string as signed integer.
+-- On success returns Just result, Nothing otherwise.
 parseSignedInt :: String -> Maybe Integer
 parseSignedInt s = fmap fst (runParser signedIntEofParser s)
 
@@ -129,11 +144,16 @@ intParser = Parser helper
 
 --Task4-------------------------------------------------------------------
 
+-- | Trying to parse given string as list of integer lists
+-- in the following format. 
+-- >>> "2, 1,+10  , 3,5,-7, 2"
+-- [ [1, 10], [5, -7, 2] ]
 parseIntList :: String -> [[Integer]]
 parseIntList s = case runParser listlistParser s of
   Nothing       -> error "Incorrect input"
   Just (res, _) -> res
 
+-- | Parser which is used to parse list of integer lists.
 listlistParser :: Parser Char [[Integer]]
 listlistParser = listListHelper []
   where

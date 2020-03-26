@@ -7,6 +7,7 @@ module Block5_Task1
   , eval
   ) where
 
+-- | Data type which represents arithmetical expression.
 data Expr 
   = Const Int
   | Add Expr Expr
@@ -16,6 +17,7 @@ data Expr
   | Pow Expr Expr
   deriving Show
 
+-- | Data type which represents arithmetical error.
 data ArithmeticError
   = DivisionByZero
   | NegativePow
@@ -33,6 +35,9 @@ data OpType
   | Power
   deriving Show
 
+
+-- | Evaluates given expression and returns result in Left.
+-- If something went wrong returns reason in Right.
 eval :: Expr -> Either ArithmeticError Int
 eval (Const x) = Right x
 eval (Add x y) = performOp Safe (wrapOp (+)) x y

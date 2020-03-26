@@ -16,13 +16,18 @@ module Block1_Task3AndBlock2_Task1
 
 import Data.List (foldl')
 
-data Tree a = Leaf | Branch [a] (Tree a) (Tree a)
+-- | Data types represent the BST, but in every node 
+-- there are list of same numbers.
+data Tree a 
+  = Leaf 
+  | Branch [a] (Tree a) (Tree a)
   deriving Show
 
 instance Foldable Tree where
   foldMap :: Monoid m => (a -> m) -> Tree a -> m
   foldMap _ Leaf = mempty
-  foldMap f (Branch list l r) = foldMap f l `mappend` foldMap f list `mappend` foldMap f r
+  foldMap f (Branch list l r) = 
+    foldMap f l `mappend` foldMap f list `mappend` foldMap f r
 
   foldr :: (a -> b -> b) -> b -> Tree a -> b
   foldr _ z Leaf = z
@@ -33,25 +38,34 @@ instance Ord a => Eq (Tree a) where
   (==) Leaf Leaf = True
   (==) Leaf _    = False
   (==) _    Leaf = False
-  (==) (Branch list1 l1 r1) (Branch list2 l2 r2) = list1 == list2 && l1 == l2 && r1 == r2
+  (==) (Branch list1 l1 r1) (Branch list2 l2 r2) = 
+    list1 == list2 && l1 == l2 && r1 == r2
 
+-- | Returns empty Tree.
 emptyTree :: Ord a => Tree a
 emptyTree = Leaf
 
+-- | Create Tree from list.
 fromList :: Ord a => [a] -> Tree a
 fromList xs = foldl' insertElement emptyTree xs
 
+-- | Folds Tree to list.
 toList :: Ord a => Tree a -> [a]
 toList = foldMap (\x -> [x])
 
+-- | Checks whether Tree is empty.
 isTreeEmpty :: Ord a => Tree a -> Bool
 isTreeEmpty Leaf = True
 isTreeEmpty _    = False
 
+-- | Returns number of elements in Tree.
 getTreeSize :: Ord a => Tree a -> Int
 getTreeSize Leaf             = 0
 getTreeSize (Branch val l r) = (length val) + getTreeSize l + getTreeSize r
 
+-- | Perfroms search of element in Tree. If there are
+-- atleast one copy of such element is present, 
+-- returns Just and Nothing overwise.
 findElement :: Ord a => Tree a -> a -> Maybe a
 findElement Leaf _ = Nothing
 findElement (Branch list l r) x = 
@@ -63,6 +77,7 @@ findElement (Branch list l r) x =
       then findElement l x
       else findElement r x
 
+-- | Inserts element into given Tree and returns modified Tree.
 insertElement :: Ord a => Tree a -> a -> Tree a
 insertElement Leaf x = Branch [x] Leaf Leaf
 insertElement (Branch list l r) x =
@@ -74,6 +89,7 @@ insertElement (Branch list l r) x =
       then Branch list (insertElement l x) r
       else Branch list l (insertElement r x)
 
+-- | Deletes element from given Tree and returns modified Tree.
 deleteElement :: Ord a => Tree a -> a -> Tree a
 deleteElement Leaf              _ = Leaf
 deleteElement (Branch list l r) x =

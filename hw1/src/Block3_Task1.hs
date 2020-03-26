@@ -3,6 +3,8 @@ module Block3_Task1
   , maybeConcat
   ) where
 
+-- | Takes list of list inside Maybe and returns
+-- their concatentaion.
 maybeConcat :: [Maybe [a]] -> [a]
 maybeConcat list = helper list []
   where
@@ -12,6 +14,9 @@ maybeConcat list = helper list []
       Just y  -> helper xs (acc ++ y)
       Nothing -> helper xs acc
 
+-- | Takes list of (Either a b), where a and b are Monoids,
+-- returns pair (c, d), where c is mappend of all elements
+-- inside Left, d is mappend of all elements inside Right.
 eitherConcat :: (Monoid a, Monoid b) => [Either a b] -> (a,b)
 eitherConcat list = helper list (mempty, mempty)
   where

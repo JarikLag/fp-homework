@@ -11,6 +11,8 @@ average xs = realToFrac (sum xs) / genericLength xs
 initState :: ([Double], [Int])
 initState = ([], [])
 
+-- | Calculates simple moving average with given window size
+-- on given list.
 moving :: Int -> [Int] -> [Double]
 moving n list 
   | n <= 0    = error "Window size cannot be less than zero"
